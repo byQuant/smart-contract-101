@@ -36,8 +36,10 @@ contract BinCoin is ERC20 {
     }
 
     function guessLottery(uint16 _lottery) public payable {
-        require(balanceOf(msg.sender) >= price);
+        require(balanceOf(msg.sender) >= price, "Not enougth token");
         _transfer(msg.sender, address(this), price);
+
+        stake += price;
 
         if (_lottery == lottery) {
             _transfer(address(this), msg.sender, reward);
@@ -49,5 +51,13 @@ contract BinCoin is ERC20 {
             price = 0;
             stake = 0;
         }
+    }
+
+    function getReward() public view returns(uint256)  {
+        return reward;
+    }
+
+    function getStake() public view returns(uint256)  {
+        return stake;
     }
 }
