@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract BinCoin is ERC20 {
     address private owner;
     address issuer;
-    uint16 lottery;
+    uint16 private lottery;
     uint256 reward;
     uint256 price;
     uint256 stake;
@@ -32,17 +32,17 @@ contract BinCoin is ERC20 {
         reward = _reward;
         price = _price;
         stake = 0;
-        _transfer(msg.sender, address(0), _reward);
+        _transfer(msg.sender, address(this), _reward);
     }
 
     function guessLottery(uint16 _lottery) public payable {
         require(balanceOf(msg.sender) >= price);
-        _transfer(msg.sender, address(0), price);
+        _transfer(msg.sender, address(this), price);
 
         if (_lottery == lottery) {
-            _transfer(address(0), msg.sender, reward);
-            _transfer(address(0), issuer, stake * 90000 / 100000);
-            _transfer(address(0), owner, stake * 10000 / 100000 );
+            _transfer(address(this), msg.sender, reward);
+            _transfer(address(this), issuer, stake * 90000 / 100000);
+            _transfer(address(this), owner, stake * 10000 / 100000 );
             issuer = address(0);
             lottery = 0;
             reward = 0;
