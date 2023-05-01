@@ -54,7 +54,7 @@ const deployContract = async (
   console.log("User3 Balance: ", await binCoinContract.balanceOf(user3.address));
   console.log("User1 Balance: ", await binCoinContract.balanceOf(user1.address));
 
-  console.log("Stake ", await binCoinContract.getReward());
+  console.log("Reward ", await binCoinContract.getReward());
   console.log("Stake ", await binCoinContract.getStake());
 
 
