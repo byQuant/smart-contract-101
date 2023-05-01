@@ -27,10 +27,10 @@ const deployContract = async (
   await binCoinContract.connect(root).transfer(user3.address, "3000000000000000000");
 
   console.log("User1 Balance: ", await binCoinContract.balanceOf(user1.address));
-  console.log("User2 Balance: ", await binCoinContract.balanceOf(user1.address));
-  console.log("User3 Balance: ", await binCoinContract.balanceOf(user1.address));
+  console.log("User2 Balance: ", await binCoinContract.balanceOf(user2.address));
+  console.log("User3 Balance: ", await binCoinContract.balanceOf(user3.address));
 
-  const issueLottery = await binCoinContract
+  await binCoinContract
     .connect(user1)
     .issueLottery(12908, "1000000000000000000", "10000000000000000");
   // console.log(issueLottery);
